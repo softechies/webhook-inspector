@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+/*
+  Palette: cool lab-bench paper with navy ink. HTTP methods get their own signal colours,
+  which are the only strong colour on screen, so a glance at the feed says what arrived.
+*/
+@theme {
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-paper: #eef1f5;
+  --color-panel: #ffffff;
+  --color-ink: #1b2433;
+  --color-muted: #5d6b80;
+  --color-line: #d6dce5;
+  --color-accent: #3f46c8;
+  --color-accent-soft: #e7e8fb;
+
+  --color-get: #0e7f74;
+  --color-post: #3f46c8;
+  --color-put: #a76b12;
+  --color-patch: #7d3fa6;
+  --color-delete: #b8322a;
+  --color-other: #5d6b80;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* A new request flashes once in the feed: the only motion on the page, and it means something arrived. */
+@keyframes arrive {
+  from { background-color: var(--color-accent-soft); }
+  to { background-color: transparent; }
+}
+.arrived {
+  animation: arrive 1.6s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .arrived { animation: none; }
+}

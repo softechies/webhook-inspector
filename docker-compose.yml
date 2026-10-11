@@ -1,0 +1,17 @@
+services:
+  inspector:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      # Set this before putting the inspector on the internet.
+      INSPECTOR_PASSWORD: ${INSPECTOR_PASSWORD:-}
+      PUBLIC_URL: ${PUBLIC_URL:-}
+      MAX_REQUESTS_PER_BIN: ${MAX_REQUESTS_PER_BIN:-500}
+      MAX_BODY_BYTES: ${MAX_BODY_BYTES:-1048576}
+    volumes:
+      - inspector-data:/data
+    restart: unless-stopped
+
+volumes:
+  inspector-data:
